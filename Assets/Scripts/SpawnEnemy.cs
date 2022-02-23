@@ -9,7 +9,7 @@ public class SpawnEnemy : MonoBehaviour
     GameObject Object;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Respawn")
+        if(collision.gameObject.tag == "SpawnEnemy")
         {
             if(Object == null)
             Object = Instantiate( Target,transform.position, transform.rotation);

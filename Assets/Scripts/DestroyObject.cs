@@ -5,21 +5,18 @@ using UnityEngine;
 public class DestroyObject : MonoBehaviour
 {
     public GameObject target;
+    GameObject Player;
+    private void Start()
+    {
+        Player = GameObject.Find("Player");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player_Attack")
         {
-            if(Input.GetKeyDown(KeyCode.F))
+            if (target != null)
             Destroy(target);
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            if (Input.GetKeyDown(KeyCode.J))
-                Destroy(target);
         }
     }
 

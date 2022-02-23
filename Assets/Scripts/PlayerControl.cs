@@ -41,13 +41,19 @@ public class PlayerControl : MonoBehaviour
     public Image HealthBar;
     public Image ManaBar;
     public string NameLevel;
+    public LayerMask groundMask;
 
     Vector2 Spawnpoint;
+    public AnimatetionEventNotify AniNotify;
+    public MeleeAttack AttackBehevier;
+    public VirtualButtonState _MoveLButton;
+    public VirtualButtonState _MoveRButton;
+    public VirtualButtonState _JumpButton;
+    public VirtualButtonState _DashButton;
+    public VirtualButtonState _AttackButton;
+    public VirtualButtonState _SkillButton_1;
+    public VirtualButtonState _SkillButton_2;
 
-    [SerializeField]
-    AnimatetionEventNotify AniNotify;
-    [SerializeField]
-    MeleeAttack AttackBehevier;
     void Start()
     {
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
@@ -68,10 +74,12 @@ public class PlayerControl : MonoBehaviour
         ManaRatio = Mana / 100;
         float currentFillHealth = HealthBar.fillAmount;
         float currentFillMana = ManaBar.fillAmount;
-        HealthBar.fillAmount = Mathf.Lerp(currentFillHealth, HealthRatio, 0.01f);
-        ManaBar.fillAmount = Mathf.Lerp(currentFillMana, ManaRatio, 0.01f);
+        HealthBar.fillAmount = Mathf.Lerp(currentFillHealth, HealthRatio, 0.05f);
+        ManaBar.fillAmount = Mathf.Lerp(currentFillMana, ManaRatio, 0.05f);
 
-        if (!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A ) || (AniNotify.OnAttacking && isGrounded))
+        if (((!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+            || (_MoveRButton._currentState == VirtualButtonState.State.Up && _MoveLButton._currentState == VirtualButtonState.State.Up))
+            || (AniNotify.OnAttacking && isGrounded))
         {
             animator.SetBool("isRuning", false);
             xAxis = 0;
@@ -80,28 +88,30 @@ public class PlayerControl : MonoBehaviour
         if (!Stun)
         {
             //Checking for inputs
-            if (Input.GetKey(KeyCode.A) && !isDash
-                && !AniNotify.OnAttacking)
+            if ((Input.GetKey(KeyCode.A) || _MoveLButton._currentState == VirtualButtonState.State.Down) 
+                && !isDash&& !AniNotify.OnAttacking)
             {
                 xAxis = -1;
                 animator.SetBool("isRuning", true);
             }
-            if (Input.GetKey(KeyCode.D) && !isDash
-                && !AniNotify.OnAttacking)
+            if ((Input.GetKey(KeyCode.D) || _MoveRButton._currentState == VirtualButtonState.State.Down)
+                && !isDash && !AniNotify.OnAttacking)
             {
                 xAxis = 1;
                 animator.SetBool("isRuning", true);
             }
 
             //space jump key pressed?
-            if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !isDash
-                && !AniNotify.OnAttacking)
+            if ((Input.GetKeyDown(KeyCode.Space) || _JumpButton._currentState == VirtualButtonState.State.Down) 
+                && isGrounded && !isDash&& !AniNotify.OnAttacking)
             {
+                _JumpButton._currentState = VirtualButtonState.State.Up;
                 isJumpPressed = true;
                 isGrounded = false;
             }
 
-            if (Input.GetKeyDown(KeyCode.LeftShift) && !isDash && isGrounded
+            if ((Input.GetKeyDown(KeyCode.LeftShift) || _DashButton._currentState == VirtualButtonState.State.Down) 
+                && !isDash && isGrounded
                  && !AniNotify.OnAttacking && xAxis != 0)
             {
                 animator.SetBool("isdash", true);
@@ -110,7 +120,8 @@ public class PlayerControl : MonoBehaviour
 
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha1) && Mana - SkillCost[0] > 0
+            if ((Input.GetKeyDown(KeyCode.Alpha1) || _SkillButton_1._currentState == VirtualButtonState.State.Down)
+                && Mana - SkillCost[0] > 0
                 && !AniNotify.OnAttacking && isGrounded && !Skill_1)
             {
                 AniNotify.OnAttacking = true;
@@ -119,7 +130,8 @@ public class PlayerControl : MonoBehaviour
                 animator.SetTrigger("Skill_1");
             }
 
-            if (Input.GetKeyDown(KeyCode.Alpha2) && Mana - SkillCost[1] > 0
+            if ((Input.GetKeyDown(KeyCode.Alpha2) || _SkillButton_2._currentState == VirtualButtonState.State.Down)
+                && Mana - SkillCost[1] > 0
                 && !AniNotify.OnAttacking && isGrounded && !Skill_2)
             {
                 AniNotify.OnAttacking = true;
@@ -128,7 +140,7 @@ public class PlayerControl : MonoBehaviour
                 animator.SetTrigger("Skill_2");
             }
 
-            if ((Input.GetKeyDown(KeyCode.J) || Input.GetButtonDown("Fire1"))
+            if ((Input.GetKeyDown(KeyCode.J) || _AttackButton._currentState == VirtualButtonState.State.Down)
                 && !AniNotify.OnAttacking)
             {
                 AniNotify.OnAttacking = true;
@@ -150,6 +162,8 @@ public class PlayerControl : MonoBehaviour
     //=====================================================
     private void FixedUpdate()
     {
+        Update_Ground();
+
         RecoverHP_MP();
 
         //Check update movement based on input
@@ -163,17 +177,6 @@ public class PlayerControl : MonoBehaviour
     //check if player is on the ground
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Ground")
-        {
-            Vector2 playerpos = transform.position;
-            Vector2 groundpos = collision.gameObject.transform.position;
-            if (playerpos.y > groundpos.y)
-            {
-                animator.SetBool("isground", true);
-                isGrounded = true;
-            }
-        }
-
         if (collision.gameObject.tag == "health")
         {
             HealtCal(-20);
@@ -188,12 +191,19 @@ public class PlayerControl : MonoBehaviour
     }
 
     //check if player is not on the ground
-    private void OnCollisionExit2D(Collision2D collision)
+    void Update_Ground()
     {
-        if (collision.gameObject.tag == "Ground")
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.up, Vector2.down, 1.5f, groundMask);
+
+        if (hit.collider != null)
         {
-            animator.SetBool("isground", false);
+            isGrounded = true;
+            animator.SetBool("isground", true);
+        }
+        else
+        {
             isGrounded = false;
+            animator.SetBool("isground", false);
         }
     }
 
@@ -229,15 +239,10 @@ public class PlayerControl : MonoBehaviour
     }
     IEnumerator dash(float direction)
     {
-
         rb2d.velocity = new Vector2(rb2d.velocity.x, 0f);
         rb2d.AddForce(new Vector2(dashForce * direction, 0f), ForceMode2D.Impulse);
-        
-        float garvity = rb2d.gravityScale;
-        rb2d.gravityScale = 0;
         yield return new WaitForSeconds(0.8f);
         isDash = false;
-        rb2d.gravityScale = garvity;
         animator.SetBool("isdash", false);
 
     }
