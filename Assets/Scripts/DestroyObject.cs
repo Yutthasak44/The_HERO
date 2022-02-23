@@ -6,6 +6,7 @@ public class DestroyObject : MonoBehaviour
 {
     public GameObject target;
     GameObject Player;
+    public Animator animator;
     private void Start()
     {
         Player = GameObject.Find("Player");
@@ -16,8 +17,16 @@ public class DestroyObject : MonoBehaviour
         if (collision.gameObject.tag == "Player_Attack")
         {
             if (target != null)
-            Destroy(target);
+            {
+                animator.enabled = true;
+                Destroy(target);
+            }
         }
+    }
+
+    void Setanimate()
+    {
+        animator.enabled = false;
     }
 
 }

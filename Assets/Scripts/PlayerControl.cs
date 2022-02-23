@@ -58,9 +58,9 @@ public class PlayerControl : MonoBehaviour
     {
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
-        Spawnpoint.x = PlayerPrefs.GetFloat("pointx");
+        /*Spawnpoint.x = PlayerPrefs.GetFloat("pointx");
         Spawnpoint.y = PlayerPrefs.GetFloat("pointy");
-        gameObject.transform.position = Spawnpoint;
+        gameObject.transform.position = Spawnpoint;*/
     }
 
     void Update()
