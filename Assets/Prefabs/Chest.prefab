@@ -126,7 +126,7 @@ MonoBehaviour:
   Item:
   - {fileID: 478464048223690070, guid: 01a198071763d4f429e0427a2bceaaa5, type: 3}
   - {fileID: 3048923211896900074, guid: 7561b21275212fb449ee8b451a70b6b8, type: 3}
-  PercentDropRate: 100
+  PercentDropRate: 50
 --- !u!50 &-47399223441779722
 Rigidbody2D:
   serializedVersion: 4

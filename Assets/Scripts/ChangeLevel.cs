@@ -12,7 +12,13 @@ public class ChangeLevel : MonoBehaviour
         GameObject collisiongameObject = collision.gameObject;
         if (collisiongameObject.tag == "Player")
         {
-            SceneManager.LoadScene(NameLevel);
+            ChangeScene();
         }
     }
+
+    public void ChangeScene()
+    {
+        SceneManager.LoadScene(NameLevel);
+    }
+
 }
