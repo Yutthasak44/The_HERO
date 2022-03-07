@@ -15,7 +15,8 @@ public class SpawnTrap : MonoBehaviour
         if (collision.gameObject.tag == "SpawnEnemy")
         {
             start = true;
-            Object = Instantiate(Target, transform.position, transform.rotation);
+            if(spawntime == 0)
+                Object = Instantiate(Target, transform.position, transform.rotation);
         }
     }
     private void OnTriggerExit2D(Collider2D collision)

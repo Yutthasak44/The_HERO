@@ -7,9 +7,12 @@ public class DestroyObject : MonoBehaviour
     public GameObject target;
     GameObject Player;
     public Animator animator;
+    AudioSource Sound;
+
     private void Start()
     {
         Player = GameObject.Find("Player");
+        Sound = this.GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -19,6 +22,7 @@ public class DestroyObject : MonoBehaviour
             if (target != null)
             {
                 animator.enabled = true;
+                Sound.Play();
                 Destroy(target);
             }
         }

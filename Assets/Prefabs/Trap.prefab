@@ -99,6 +99,7 @@ MonoBehaviour:
   Target: {fileID: 7458476107734313330, guid: e681fe0b40f4c0647a7396ea0dbaf3ec, type: 3}
   start: 0
   nextspawntime: 2
+  Soundeffect: {fileID: 0}
 --- !u!61 &-3376584882679406720
 BoxCollider2D:
   m_ObjectHideFlags: 0

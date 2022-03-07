@@ -45,6 +45,7 @@ public class PlayerControl : MonoBehaviour
 
     Vector2 Spawnpoint;
     public AnimatetionEventNotify AniNotify;
+    SoundScript Soundeffect;
     public MeleeAttack AttackBehevier;
     public VirtualButtonState _MoveLButton;
     public VirtualButtonState _MoveRButton;
@@ -58,6 +59,7 @@ public class PlayerControl : MonoBehaviour
     {
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
+        Soundeffect = this.gameObject.GetComponent<SoundScript>();
         /*Spawnpoint.x = PlayerPrefs.GetFloat("pointx");
         Spawnpoint.y = PlayerPrefs.GetFloat("pointy");
         gameObject.transform.position = Spawnpoint;*/
@@ -81,6 +83,7 @@ public class PlayerControl : MonoBehaviour
             || (_MoveRButton._currentState == VirtualButtonState.State.Up && _MoveLButton._currentState == VirtualButtonState.State.Up))
             || (AniNotify.OnAttacking && isGrounded))
         {
+            Soundeffect.IsWalk = false;
             animator.SetBool("isRuning", false);
             xAxis = 0;
         }
@@ -91,12 +94,16 @@ public class PlayerControl : MonoBehaviour
             if ((Input.GetKey(KeyCode.A) || _MoveLButton._currentState == VirtualButtonState.State.Down) 
                 && !isDash&& !AniNotify.OnAttacking)
             {
+                if(isGrounded)
+                    Soundeffect.IsWalk = true;
                 xAxis = -1;
                 animator.SetBool("isRuning", true);
             }
             if ((Input.GetKey(KeyCode.D) || _MoveRButton._currentState == VirtualButtonState.State.Down)
                 && !isDash && !AniNotify.OnAttacking)
             {
+                if (isGrounded)
+                    Soundeffect.IsWalk = true;
                 xAxis = 1;
                 animator.SetBool("isRuning", true);
             }
@@ -181,11 +188,13 @@ public class PlayerControl : MonoBehaviour
         {
             HealtCal(-20);
             Destroy(collision.gameObject);
+            Soundeffect.SoundGetItem();
         }
         if (collision.gameObject.tag == "mana")
         {
             ManaCal(20);
             Destroy(collision.gameObject);
+            Soundeffect.SoundGetItem();
         }
 
     }
@@ -233,6 +242,7 @@ public class PlayerControl : MonoBehaviour
         if (isJumpPressed)
         {
             rb2d.AddForce(new Vector2(0, jumpForce));
+            Soundeffect.PlaySound(Soundeffect.SoundJump);
             isJumpPressed = false;
         }
         return vel;
@@ -249,6 +259,7 @@ public class PlayerControl : MonoBehaviour
 
     public void Player_Healt(int takedamage, GameObject damageFromobject)
     {
+        Soundeffect.PlaySound(Soundeffect.SoundHurt);
         animator.SetBool("Stun", true);
         HealtCal(takedamage);
         Vector2 currentLocation = gameObject.transform.position;
