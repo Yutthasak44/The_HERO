@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyObject : MonoBehaviour
+public class OpenAndCloseDoor : MonoBehaviour
 {
     public GameObject target;
     GameObject Player;
@@ -21,7 +21,8 @@ public class DestroyObject : MonoBehaviour
         {
             if (target != null)
             {
-                animator.enabled = true;
+                if(animator != null)
+                    animator.enabled = true;
                 Sound.Play();
                 Destroy(target);
             }

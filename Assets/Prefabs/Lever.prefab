@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 681747675366850741}
   - component: {fileID: 5403549825586764833}
   - component: {fileID: 7843688878249100855}
-  - component: {fileID: 5879772560383062611}
   - component: {fileID: 687675184}
+  - component: {fileID: 8705532228570417806}
   m_Layer: 0
   m_Name: Lever
   m_TagString: Untagged
@@ -131,20 +131,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &5879772560383062611
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6182586276311868206}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e8bc61edbc36f94d832c6e080325a54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  animator: {fileID: 7843688878249100855}
 --- !u!82 &687675184
 AudioSource:
   m_ObjectHideFlags: 0
@@ -241,3 +227,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8705532228570417806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6182586276311868206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e3ffe260283cd4e91ac95ff4d4c123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  animator: {fileID: 0}

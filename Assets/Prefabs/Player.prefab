@@ -262,7 +262,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 5
   m_Sprite: {fileID: -4474740912344006247, guid: 67a6d9a8173b748489a6218b1b89377a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -433,7 +433,7 @@ MonoBehaviour:
   SoundAttack: {fileID: 4039071920398587974}
   SoundJump: {fileID: 2095241246728841761}
   SoundHurt: {fileID: 6621330693328126435}
-  SoundItem: {fileID: 1509503347031670389}
+  SoundItem: {fileID: 0}
   IsWalk: 0
 --- !u!70 &594138875915841454
 CapsuleCollider2D:
@@ -525,11 +525,6 @@ AudioSource:
 --- !u!82 &4039071920398587974 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 3473110441736302525, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
-  m_PrefabInstance: {fileID: 594295970632087547}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &1509503347031670389 stripped
-AudioSource:
-  m_CorrespondingSourceObject: {fileID: 2075464823556884878, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
   m_PrefabInstance: {fileID: 594295970632087547}
   m_PrefabAsset: {fileID: 0}
 --- !u!82 &2095241246728841761 stripped

@@ -79,85 +79,88 @@ public class PlayerControl : MonoBehaviour
         HealthBar.fillAmount = Mathf.Lerp(currentFillHealth, HealthRatio, 0.05f);
         ManaBar.fillAmount = Mathf.Lerp(currentFillMana, ManaRatio, 0.05f);
 
-        if (((!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
-            || (_MoveRButton._currentState == VirtualButtonState.State.Up && _MoveLButton._currentState == VirtualButtonState.State.Up))
-            || (AniNotify.OnAttacking && isGrounded))
+        if (Health > 0)
         {
-            Soundeffect.IsWalk = false;
-            animator.SetBool("isRuning", false);
-            xAxis = 0;
-        }
-
-        if (!Stun)
-        {
-            //Checking for inputs
-            if ((Input.GetKey(KeyCode.A) || _MoveLButton._currentState == VirtualButtonState.State.Down) 
-                && !isDash&& !AniNotify.OnAttacking)
+            if (((!Input.GetKey(KeyCode.D) && !Input.GetKey(KeyCode.A))
+                || (_MoveRButton._currentState == VirtualButtonState.State.Up && _MoveLButton._currentState == VirtualButtonState.State.Up))
+                || (AniNotify.OnAttacking && isGrounded))
             {
-                if(isGrounded)
-                    Soundeffect.IsWalk = true;
-                xAxis = -1;
-                animator.SetBool("isRuning", true);
-            }
-            if ((Input.GetKey(KeyCode.D) || _MoveRButton._currentState == VirtualButtonState.State.Down)
-                && !isDash && !AniNotify.OnAttacking)
-            {
-                if (isGrounded)
-                    Soundeffect.IsWalk = true;
-                xAxis = 1;
-                animator.SetBool("isRuning", true);
+                Soundeffect.IsWalk = false;
+                animator.SetBool("isRuning", false);
+                xAxis = 0;
             }
 
-            //space jump key pressed?
-            if ((Input.GetKeyDown(KeyCode.Space) || _JumpButton._currentState == VirtualButtonState.State.Down) 
-                && isGrounded && !isDash&& !AniNotify.OnAttacking)
+            if (!Stun)
             {
-                _JumpButton._currentState = VirtualButtonState.State.Up;
-                isJumpPressed = true;
-                isGrounded = false;
-            }
+                //Checking for inputs
+                if ((Input.GetKey(KeyCode.A) || _MoveLButton._currentState == VirtualButtonState.State.Down)
+                    && !isDash && !AniNotify.OnAttacking)
+                {
+                    if (isGrounded)
+                        Soundeffect.IsWalk = true;
+                    xAxis = -1;
+                    animator.SetBool("isRuning", true);
+                }
+                if ((Input.GetKey(KeyCode.D) || _MoveRButton._currentState == VirtualButtonState.State.Down)
+                    && !isDash && !AniNotify.OnAttacking)
+                {
+                    if (isGrounded)
+                        Soundeffect.IsWalk = true;
+                    xAxis = 1;
+                    animator.SetBool("isRuning", true);
+                }
 
-            if ((Input.GetKeyDown(KeyCode.LeftShift) || _DashButton._currentState == VirtualButtonState.State.Down) 
-                && !isDash && isGrounded
-                 && !AniNotify.OnAttacking && xAxis != 0)
+                //space jump key pressed?
+                if ((Input.GetKeyDown(KeyCode.Space) || _JumpButton._currentState == VirtualButtonState.State.Down)
+                    && isGrounded && !isDash && !AniNotify.OnAttacking)
+                {
+                    _JumpButton._currentState = VirtualButtonState.State.Up;
+                    isJumpPressed = true;
+                    isGrounded = false;
+                }
+
+                if ((Input.GetKeyDown(KeyCode.LeftShift) || _DashButton._currentState == VirtualButtonState.State.Down)
+                    && !isDash && isGrounded
+                     && !AniNotify.OnAttacking && xAxis != 0)
+                {
+                    animator.SetBool("isdash", true);
+                    isDash = true;
+                    StartCoroutine(dash(direction));
+
+                }
+
+                if ((Input.GetKeyDown(KeyCode.Alpha1) || _SkillButton_1._currentState == VirtualButtonState.State.Down)
+                    && Mana - SkillCost[0] > 0
+                    && !AniNotify.OnAttacking && isGrounded && !Skill_1)
+                {
+                    AniNotify.OnAttacking = true;
+                    ManaCal(-SkillCost[0]);
+                    Skill = 1;
+                    animator.SetTrigger("Skill_1");
+                }
+
+                if ((Input.GetKeyDown(KeyCode.Alpha2) || _SkillButton_2._currentState == VirtualButtonState.State.Down)
+                    && Mana - SkillCost[1] > 0
+                    && !AniNotify.OnAttacking && isGrounded && !Skill_2)
+                {
+                    AniNotify.OnAttacking = true;
+                    ManaCal(-SkillCost[1]);
+                    Skill = 2;
+                    animator.SetTrigger("Skill_2");
+                }
+
+                if ((Input.GetKeyDown(KeyCode.J) || _AttackButton._currentState == VirtualButtonState.State.Down)
+                    && !AniNotify.OnAttacking)
+                {
+                    AniNotify.OnAttacking = true;
+                    animator.SetTrigger("isAttack");
+                }
+            }
+            else
             {
-                animator.SetBool("isdash", true);
-                isDash = true;
-                StartCoroutine(dash(direction));
-
+                direction = 0;
+                xAxis = 0;
             }
-
-            if ((Input.GetKeyDown(KeyCode.Alpha1) || _SkillButton_1._currentState == VirtualButtonState.State.Down)
-                && Mana - SkillCost[0] > 0
-                && !AniNotify.OnAttacking && isGrounded && !Skill_1)
-            {
-                AniNotify.OnAttacking = true;
-                ManaCal(-SkillCost[0]);
-                Skill = 1;
-                animator.SetTrigger("Skill_1");
-            }
-
-            if ((Input.GetKeyDown(KeyCode.Alpha2) || _SkillButton_2._currentState == VirtualButtonState.State.Down)
-                && Mana - SkillCost[1] > 0
-                && !AniNotify.OnAttacking && isGrounded && !Skill_2)
-            {
-                AniNotify.OnAttacking = true;
-                ManaCal(-SkillCost[1]);
-                Skill = 2;
-                animator.SetTrigger("Skill_2");
-            }
-
-            if ((Input.GetKeyDown(KeyCode.J) || _AttackButton._currentState == VirtualButtonState.State.Down)
-                && !AniNotify.OnAttacking)
-            {
-                AniNotify.OnAttacking = true;
-                animator.SetTrigger("isAttack");
-            }
-        }
-        else
-        {
-            direction = 0;
-            xAxis = 0;
         }
 
         IsAttacking();
@@ -242,7 +245,6 @@ public class PlayerControl : MonoBehaviour
         if (isJumpPressed)
         {
             rb2d.AddForce(new Vector2(0, jumpForce));
-            Soundeffect.PlaySound(Soundeffect.SoundJump);
             isJumpPressed = false;
         }
         return vel;
@@ -275,10 +277,6 @@ public class PlayerControl : MonoBehaviour
                 rb2d.AddForce(new Vector2(-3200, 300));
             } }
         print(this.gameObject.name + ": HP : " + Health + "Frome : " + damageFromobject.name);
-        if (Health <= 0)
-        {
-            print("die");
-        }
     }
 
     void HealtCal(float value)
@@ -289,7 +287,7 @@ public class PlayerControl : MonoBehaviour
         {
             Health = 100;
         }
-        else if (Health < 0)
+        else if (Health <= 0)
         {
             Health = 0;
             animator.SetBool("isDead", true);
