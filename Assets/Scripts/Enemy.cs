@@ -11,10 +11,11 @@ public class Enemy : MonoBehaviour
     public Rigidbody2D rb2d;
     public bool knockback;
 
-    private void Start()
+    public void Start()
     {
         Player = GameObject.Find("Player");
     }
+
 
     public void Enemy_Healt(int takedamage, GameObject damageFromobject)
     {

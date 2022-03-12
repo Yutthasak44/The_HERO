@@ -281,6 +281,9 @@ MonoBehaviour:
   EnemyDamage: 0
   rb2d: {fileID: 0}
   knockback: 1
+  movementspeed: 0
+  detectRange: 10
+  maximumRange: 10
 --- !u!1 &3420168649891914842
 GameObject:
   m_ObjectHideFlags: 0
