@@ -28,8 +28,8 @@ public class PlayerControl : MonoBehaviour
     public bool isGrounded;
     private bool isJumpPressed;
     private bool isDash;
-    private bool Skill_1;
-    private bool Skill_2;
+    public bool Skill_1;
+    public bool Skill_2;
     private float[] SkillCost = { 2, 20 };
     private Animator animator;
     private Rigidbody2D rb2d;
@@ -68,13 +68,11 @@ public class PlayerControl : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("SkillUnlock1") == 1)
             {
-                Skill_1 = true;
                 ButtoSkill_1.SetActive(true);
             }
 
             if (PlayerPrefs.GetInt("SkillUnlock2") == 1)
             {
-                Skill_2 = true;
                 ButtoSkill_2.SetActive(true);
             }
         }
