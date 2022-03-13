@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300014, guid: ae3918a914038694d852d0bb81f62473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -127,7 +127,9 @@ GameObject:
   - component: {fileID: 2323493177053199930}
   - component: {fileID: -3376584882679406720}
   - component: {fileID: 7794211747172361228}
-  - component: {fileID: 2746917534075752456}
+  - component: {fileID: 8581876485546085448}
+  - component: {fileID: 3870581871794959431}
+  - component: {fileID: 2881635299981507974}
   m_Layer: 9
   m_Name: ProjectileEnemy
   m_TagString: Enemy
@@ -193,7 +195,7 @@ SpriteRenderer:
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300018, guid: ae3918a914038694d852d0bb81f62473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 1, y: 1}
@@ -264,26 +266,62 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2746917534075752456
+--- !u!114 &8581876485546085448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2323493177053199931}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87e373515c7e88d4f80d28ec77cde0e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 056e0d9ec9fb87842bfaab46e9bf7371, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 0}
+  healt: 5
+  EnemyDamage: 0
+  knockback: 0
+--- !u!114 &3870581871794959431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323493177053199931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bc5b55f54a79914fad19dd9aa1ff1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   healt: 1
   EnemyDamage: 0
-  rb2d: {fileID: 0}
-  knockback: 1
+  knockback: 0
+  isCanMove: 0
+  Stun: 0
+  StunTimeRate: 0
   movementspeed: 0
-  detectRange: 10
-  maximumRange: 10
+  distancnAttack: 0
+--- !u!95 &2881635299981507974
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2323493177053199931}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3420168649891914842
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,7 +333,7 @@ GameObject:
   - component: {fileID: 1516334487271788341}
   - component: {fileID: 3631845102993902338}
   m_Layer: 0
-  m_Name: Medieval_props_free_11
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,8 +347,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3420168649891914842}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.389, y: 0.011, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.33, y: 0.01, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 2323493177053199928}
   m_RootOrder: 1
@@ -358,7 +396,7 @@ SpriteRenderer:
   m_Sprite: {fileID: 21300022, guid: ae3918a914038694d852d0bb81f62473, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
-  m_FlipY: 0
+  m_FlipY: 1
   m_DrawMode: 0
   m_Size: {x: 0.6041667, y: 0.7708333}
   m_AdaptiveModeThreshold: 0.5

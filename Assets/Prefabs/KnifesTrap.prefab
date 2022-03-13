@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95db6aeea8c747848b405c1350cdd30c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileSpeed: 15
+  projectileSpeed: -15
   gravity: 0
   ObjectEffect: {fileID: 0}
   BomeDestroy: 0

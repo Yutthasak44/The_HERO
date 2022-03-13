@@ -394,7 +394,7 @@ public class PlayerControl : MonoBehaviour
             for (int index = 0; index < AttackBehevier.hitObjects.Count; index++)
             {
                 GameObject currenObject = AttackBehevier.hitObjects[index];
-                Enemy enemy = currenObject.GetComponent<Enemy>();
+                EnemyHealth enemy = currenObject.GetComponent<EnemyHealth>();
                 enemy.Enemy_Healt(AttackDamage, this.gameObject);
             }
             AttackBehevier.hitObjects.Clear();

@@ -191,13 +191,11 @@ GameObject:
   - component: {fileID: 6622452023304976656}
   - component: {fileID: 6622452023304976657}
   - component: {fileID: 6622452023304976659}
-  - component: {fileID: 7876669543461006709}
   - component: {fileID: 6622452023304976671}
   - component: {fileID: 6622452023304976660}
   - component: {fileID: 9219658976201597072}
   - component: {fileID: 1344201804}
   - component: {fileID: 5166965332722077063}
-  - component: {fileID: 594138875915841454}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -296,32 +294,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &7876669543461006709
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6622452023304976661}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.040866792, y: 0.91701466}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0}
-    oldSize: {x: 1.08, y: 1.92}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.592106, y: 1.8340293}
-  m_EdgeRadius: 0
 --- !u!95 &6622452023304976671
 Animator:
   serializedVersion: 3
@@ -365,6 +337,8 @@ MonoBehaviour:
   Stun: 1
   StunTimeRate: 0.5
   isGrounded: 0
+  Skill_1: 0
+  Skill_2: 0
   projectileBullets: {fileID: 2574166384498844119, guid: 85f9b17c32777c541b01af3d2489b7f6, type: 3}
   projectileBooms: {fileID: 115688176811081501, guid: 2b53485dba876104685d462fd4ad9231, type: 3}
   AttackZone: {fileID: 1268198853}
@@ -438,22 +412,6 @@ MonoBehaviour:
   SoundHurt: {fileID: 6621330693328126435}
   SoundItem: {fileID: 0}
   IsWalk: 0
---- !u!70 &594138875915841454
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6622452023304976661}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.96}
-  m_Size: {x: 0.8, y: 1.9}
-  m_Direction: 0
 --- !u!1001 &1459698777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -739,11 +697,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
---- !u!4 &57104480677652859 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 645630142452293248, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
-  m_PrefabInstance: {fileID: 594295970632087547}
-  m_PrefabAsset: {fileID: 0}
 --- !u!82 &1433273406052423747 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 2007303169477734328, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
@@ -762,5 +715,10 @@ AudioSource:
 --- !u!82 &6621330693328126435 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 6042964449869854232, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
+  m_PrefabInstance: {fileID: 594295970632087547}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &57104480677652859 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 645630142452293248, guid: 690d050c45a9bf34eb8a8b517c4c2140, type: 3}
   m_PrefabInstance: {fileID: 594295970632087547}
   m_PrefabAsset: {fileID: 0}
