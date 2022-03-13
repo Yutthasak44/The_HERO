@@ -12,12 +12,13 @@ public class SpawnEnemy : MonoBehaviour
     {
         if(collision.gameObject.tag == "SpawnEnemy")
         {
-            if(Object == null && !isboss)
-                Object = Instantiate( Target,transform.position, transform.rotation);
-            else
+            if (Object == null)
             {
                 Object = Instantiate(Target, transform.position, transform.rotation);
-                Destroy(this.gameObject);
+                if (isboss)
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }
