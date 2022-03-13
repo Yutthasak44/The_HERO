@@ -12,7 +12,10 @@ public class Enemy : MonoBehaviour
     public bool knockback;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //<<<<<<< HEAD=======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     public float movementspeed = 2.0f;
@@ -21,7 +24,10 @@ public class Enemy : MonoBehaviour
     Vector3 origin;
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 //>>>>>>> 9423f98c691d700f8dc3ddbbfdd5187aa3dbc106
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
     public void Start()
@@ -45,7 +51,10 @@ public class Enemy : MonoBehaviour
             Patrol(originPosition);
         }
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
     }
 
     void AttackPlayer()
@@ -63,6 +72,7 @@ public class Enemy : MonoBehaviour
     {
         transform.LookAt(new Vector3(position, transform.position.y, transform.position.z));
         transform.position = new Vector3(transform.position.x + (movementspeed * Time.deltaTime * transform.rotation.eulerAngles.normalized.y), transform.position.y, transform.position.z);
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     }
 
@@ -70,6 +80,8 @@ public class Enemy : MonoBehaviour
     {
         transform.LookAt(Player.transform);
         transform.position = new Vector3(transform.position.x + (movementspeed * Time.deltaTime * transform.rotation.eulerAngles.normalized.y), transform.position.y, transform.position.z);
+=======
+>>>>>>> Stashed changes
     }
 
     void Patrol(float position)
