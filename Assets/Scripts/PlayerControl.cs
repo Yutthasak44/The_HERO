@@ -227,7 +227,7 @@ public class PlayerControl : MonoBehaviour
         if (collision.gameObject.tag == "UnlockSkill1")
         {
             Skill_1 = true;
-            PlayerPrefs.SetInt("SkillUnlock1", 1); 
+            PlayerPrefs.SetInt("SkillUnlock1", 1);
             ButtoSkill_1.SetActive(true);
             Destroy(collision.gameObject);
         }
@@ -315,7 +315,8 @@ public class PlayerControl : MonoBehaviour
             else
             {
                 rb2d.AddForce(new Vector2(-3200, 300));
-            } }
+            }
+        }
         print(this.gameObject.name + ": HP : " + Health + "Frome : " + damageFromobject.name);
     }
 
@@ -401,16 +402,16 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    void StunUpdate() 
+    void StunUpdate()
     {
         if (Stun)
         {
             StunTime += Time.deltaTime;
 
-            if(StunTime >= StunTimeRate)
+            if (StunTime >= StunTimeRate)
             {
                 StunTime = 0;
-                Stun = false; 
+                Stun = false;
                 animator.SetBool("Stun", false);
             }
         }

@@ -7,13 +7,12 @@ public class EnemyMoveMent : MonoBehaviour
     [SerializeField]
     GameObject Player;
     PlayerControl player;
+    EnemyHealth enemyhealth;
     public int EnemyDamage = 10;
     private Rigidbody2D rb2d;
     private Animator animator;
 
-    public bool knockback;
     public bool isCanMove = false;
-
     public bool Stun;
     private bool Isattack;
     private float StunTime = 0.0f;
@@ -27,20 +26,24 @@ public class EnemyMoveMent : MonoBehaviour
     {
         Player = GameObject.Find("Player");
         player = Player.GetComponent<PlayerControl>();
+        enemyhealth = this.GetComponent<EnemyHealth>();
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
     }
 
     void Update()
     {
-        Update_FacingToPlayer();
-        if (!Stun && !Isattack && isCanMove)
+        if (enemyhealth.health > 0)
         {
-            Update_ChasingToPlayer();
-        }
-        else if (!Isattack && isCanMove)
-        {
-            StunUpdate();
+            Update_FacingToPlayer();
+            if (!Stun && !Isattack && isCanMove)
+            {
+                Update_ChasingToPlayer();
+            }
+            else if (!Isattack && isCanMove)
+            {
+                StunUpdate();
+            }
         }
     }
 
@@ -99,7 +102,7 @@ public class EnemyMoveMent : MonoBehaviour
     public void WaitingForNextAttack()
     {
         Counting++;
-        if (Counting == 2)
+        if (Counting == NextAttack)
         {
             Counting = 0;
             Isattack = false;

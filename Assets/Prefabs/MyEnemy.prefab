@@ -200,6 +200,7 @@ MonoBehaviour:
   healt: 10
   EnemyDamage: 10
   knockback: 0
+  NotHaveAnimator: 0
 --- !u!114 &6863027694500845390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,12 +215,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
   EnemyDamage: 10
-  knockback: 0
   isCanMove: 1
   Stun: 0
   StunTimeRate: 1
   movementspeed: 2
   distancnAttack: 1.8
+  Counting: 0
+  NextAttack: 2
 --- !u!95 &1936195156699140582
 Animator:
   serializedVersion: 3

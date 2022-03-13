@@ -11,6 +11,8 @@ public class EnterBossRoom : MonoBehaviour
 
     private void Start()
     {
+        if(target == null)
+            target = GameObject.Find("DoorExit");
         Sound = this.GetComponent<AudioSource>();
     }
 
@@ -19,23 +21,26 @@ public class EnterBossRoom : MonoBehaviour
         if (collision.gameObject.tag == "Player" && !isOpen)
         {
             isOpen = true;
-            Open();
+            Close();
+            
+        }
+    }
+
+    public void Open()
+    {
+        if (target != null)
+        { 
+            target.SetActive(false);
             Sound.Play();
         }
     }
 
-    void Open()
-    { 
-        if(target.active == false)
+    public void Close()
+    {
+        if (target != null)
         {
             target.SetActive(true);
-        }
-    }
-    void Close()
-    {
-        if (target.active == true)
-        {
-            target.SetActive(false);
+            Sound.Play();
         }
     }
 

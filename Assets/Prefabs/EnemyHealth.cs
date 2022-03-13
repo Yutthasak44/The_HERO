@@ -1,27 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField]
     GameObject Player;
-    public int healt = 10;
+    public float health = 10;
+    public float Maxhealth = 10;
     public int EnemyDamage = 10;
     private Rigidbody2D rb2d;
     public bool knockback;
     private Animator animator;
+    public bool HaveAnimateDeath = true;
+    public Image HealthBar;
+    public float HealthRatio = 100;
 
     public void Start()
     {
         Player = GameObject.Find("Player");
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
+        health = Maxhealth;
+    }
+
+    private void Update()
+    {
+        if(HealthBar != null)
+        {
+            UpdateHpBar();
+        }
+    }
+
+    void UpdateHpBar()
+    {
+        HealthRatio = health / Maxhealth;
+        float currentFillHealth = HealthBar.fillAmount;
+        HealthBar.fillAmount = Mathf.Lerp(currentFillHealth, HealthRatio, 0.01f);
     }
 
     public void Enemy_Healt(int takedamage, GameObject damageFromobject)
     {
-        healt -= takedamage;
+        health -= takedamage;
         Vector2 currentLocation = gameObject.transform.position;
         Vector2 damageLocation = damageFromobject.transform.position;
         EnemyMoveMent Enemymove = this.gameObject.GetComponent<EnemyMoveMent>();
@@ -39,19 +60,26 @@ public class EnemyHealth : MonoBehaviour
             }
         }
 
-        if (healt <= 0)
+        if (health <= 0)
         {
-            animator.SetTrigger("IsDeath");
+            if (HaveAnimateDeath)
+            {
+                animator.SetTrigger("IsDeath");
+            } 
+            else
+            {
+                death();
+            }
         }
 
-        print(this.gameObject.name + ": HP : " + healt + "Frome : " + damageFromobject.name);
+        print(this.gameObject.name + ": HP : " + health + "Frome : " + damageFromobject.name);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            if (healt > 0)
+            if (health > 0)
             {
                 PlayerControl player = Player.GetComponent<PlayerControl>();
                 player.Stun = true;

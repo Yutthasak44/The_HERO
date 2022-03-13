@@ -19,7 +19,7 @@ public class ProjectileAttack : MonoBehaviour
             for (int index = 0; index < hitObjects.Count; index++)
             {
                 GameObject currenObject = hitObjects[index];
-                Enemy enemy = currenObject.GetComponent<Enemy>();
+                EnemyHealth enemy = currenObject.GetComponent<EnemyHealth>();
                 enemy.Enemy_Healt(AttackDamage, this.gameObject);
             }
             hitObjects.Clear();

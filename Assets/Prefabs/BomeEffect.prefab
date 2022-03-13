@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitObjects: []
-  AttackDamage: 20
+  AttackDamage: 15
 --- !u!82 &-7389180814299799239
 AudioSource:
   m_ObjectHideFlags: 0
