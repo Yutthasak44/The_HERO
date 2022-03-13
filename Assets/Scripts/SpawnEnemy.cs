@@ -7,12 +7,17 @@ public class SpawnEnemy : MonoBehaviour
     [SerializeField]
     GameObject Target;
     GameObject Object;
-    private void OnTriggerEnter2D(Collider2D collision)
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "SpawnEnemy")
+    //    {
+    //        if (Object == null)
+    //            Object = Instantiate(Target, transform.position, transform.rotation);
+    //    }
+    //}
+
+    private void Start()
     {
-        if(collision.gameObject.tag == "SpawnEnemy")
-        {
-            if(Object == null)
-            Object = Instantiate( Target,transform.position, transform.rotation);
-        }
+        Object = Instantiate(Target, transform.position, transform.rotation);
     }
 }
