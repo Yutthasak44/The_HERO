@@ -69,12 +69,19 @@ public class PlayerControl : MonoBehaviour
             if (PlayerPrefs.GetInt("SkillUnlock1") == 1)
             {
                 ButtoSkill_1.SetActive(true);
+                Skill_1 = true;
             }
 
             if (PlayerPrefs.GetInt("SkillUnlock2") == 1)
             {
+                Skill_2 = true;
                 ButtoSkill_2.SetActive(true);
             }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("SkillUnlock1", 0);
+            PlayerPrefs.SetInt("SkillUnlock2", 0);
         }
 
         /*Spawnpoint.x = PlayerPrefs.GetFloat("pointx");
