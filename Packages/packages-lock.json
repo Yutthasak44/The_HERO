@@ -1,7 +1,5 @@
 {
   "dependencies": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     "com.unity.2d.animation": {
       "version": "5.0.9",
       "depth": 0,
@@ -74,10 +72,6 @@
       "source": "builtin",
       "dependencies": {}
     },
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     "com.unity.collab-proxy": {
       "version": "1.13.5",
       "depth": 0,
@@ -88,8 +82,6 @@
       },
       "url": "https://packages.unity.com"
     },
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     "com.unity.device-simulator": {
       "version": "3.0.3-preview",
       "depth": 0,
@@ -97,10 +89,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -118,15 +106,9 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.visualstudio": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       "version": "2.0.14",
-=======
       "version": "2.0.11",
->>>>>>> Stashed changes
-=======
       "version": "2.0.11",
->>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {
@@ -135,15 +117,9 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.ide.vscode": {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       "version": "1.2.5",
-=======
       "version": "1.2.4",
->>>>>>> Stashed changes
-=======
       "version": "1.2.4",
->>>>>>> Stashed changes
       "depth": 0,
       "source": "registry",
       "dependencies": {},
@@ -156,8 +132,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
     "com.unity.mathematics": {
       "version": "1.1.0",
       "depth": 1,
@@ -165,10 +139,6 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
     "com.unity.nuget.newtonsoft-json": {
       "version": "2.0.0",
       "depth": 1,
