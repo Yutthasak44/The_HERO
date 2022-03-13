@@ -55,11 +55,30 @@ public class PlayerControl : MonoBehaviour
     public VirtualButtonState _SkillButton_1;
     public VirtualButtonState _SkillButton_2;
 
+    public GameObject ButtoSkill_1;
+    public GameObject ButtoSkill_2;
+
     void Start()
     {
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
         animator = this.gameObject.GetComponent<Animator>();
         Soundeffect = this.gameObject.GetComponent<SoundScript>();
+
+        if (NameLevel != "Level1")
+        {
+            if (PlayerPrefs.GetInt("SkillUnlock1") == 1)
+            {
+                Skill_1 = true;
+                ButtoSkill_1.SetActive(true);
+            }
+
+            if (PlayerPrefs.GetInt("SkillUnlock2") == 1)
+            {
+                Skill_2 = true;
+                ButtoSkill_2.SetActive(true);
+            }
+        }
+
         /*Spawnpoint.x = PlayerPrefs.GetFloat("pointx");
         Spawnpoint.y = PlayerPrefs.GetFloat("pointy");
         gameObject.transform.position = Spawnpoint;*/
@@ -131,7 +150,7 @@ public class PlayerControl : MonoBehaviour
 
                 if ((Input.GetKeyDown(KeyCode.Alpha1) || _SkillButton_1._currentState == VirtualButtonState.State.Down)
                     && Mana - SkillCost[0] > 0
-                    && !AniNotify.OnAttacking && isGrounded && !Skill_1)
+                    && !AniNotify.OnAttacking && isGrounded && Skill_1)
                 {
                     AniNotify.OnAttacking = true;
                     ManaCal(-SkillCost[0]);
@@ -141,7 +160,7 @@ public class PlayerControl : MonoBehaviour
 
                 if ((Input.GetKeyDown(KeyCode.Alpha2) || _SkillButton_2._currentState == VirtualButtonState.State.Down)
                     && Mana - SkillCost[1] > 0
-                    && !AniNotify.OnAttacking && isGrounded && !Skill_2)
+                    && !AniNotify.OnAttacking && isGrounded && Skill_2)
                 {
                     AniNotify.OnAttacking = true;
                     ManaCal(-SkillCost[1]);
@@ -198,6 +217,22 @@ public class PlayerControl : MonoBehaviour
             ManaCal(20);
             Destroy(collision.gameObject);
             Soundeffect.SoundGetItem();
+        }
+
+        if (collision.gameObject.tag == "UnlockSkill1")
+        {
+            Skill_1 = true;
+            PlayerPrefs.SetInt("SkillUnlock1", 1); 
+            ButtoSkill_1.SetActive(true);
+            Destroy(collision.gameObject);
+        }
+
+        if (collision.gameObject.tag == "UnlockSkill2")
+        {
+            Skill_2 = true;
+            PlayerPrefs.SetInt("SkillUnlock2", 1);
+            ButtoSkill_2.SetActive(true);
+            Destroy(collision.gameObject);
         }
 
     }

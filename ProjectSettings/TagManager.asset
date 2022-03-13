@@ -12,6 +12,8 @@ TagManager:
   - Projectile_Atk
   - Enemy_Atk
   - SpawnEnemy
+  - UnlockSkill1
+  - UnlockSkill2
   layers:
   - Default
   - TransparentFX
